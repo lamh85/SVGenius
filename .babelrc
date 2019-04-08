@@ -11,6 +11,7 @@
         "displayName": true,
         "fileName": false
       }
-    ]
+    ],
+    "@babel/plugin-proposal-function-bind"
   ]
 }

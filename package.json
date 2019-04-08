@@ -1,7 +1,7 @@
 {
   "name": "svgenius",
   "version": "1.0.0",
-  "description": "",
+  "description": "Dear Node: stop bothering me to add a description field.",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development",
@@ -13,6 +13,7 @@
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-proposal-function-bind": "^7.2.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
