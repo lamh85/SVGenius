@@ -19,11 +19,17 @@ class App extends Component {
       <svg width='600' height='100'>
         {
           DATA_POINTS.map((dataPoint, index) => {
+            // Renders one bar
             return <rect
+              // top-left position
               x={String(index * 10)}
               y={String(POSITIONS.X_AXIS - dataPoint.y)}
+
+              // size
               width='5'
               height={String(dataPoint.y)}
+
+              // Other
               fill='blue'
               key={index}
             />

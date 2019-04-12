@@ -7,6 +7,10 @@ Requirements:
   - To the left and right of the first and last bars
 - 10px margin between the bars
 
+  Needed outputs:
+  - bar width
+  - bar height
+  
  */
 
 const MARGIN = 10
