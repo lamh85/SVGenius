@@ -10,15 +10,19 @@ Requirements:
   Needed outputs:
   - bar width
   - bar height
-  
+
  */
 
-const MARGIN = 10
+// Same margin widths for between the bars, and surrounding the first and last bar.
+// Same margin above and below the largest bar.
+const MARGIN = {
+  X: 10,
+  Y: 10
+}
 
-const contentSize = ({boxWidth, boxHeight}) => {
-  const width = boxWidth - (MARGIN * 2)
-  const height = boxHeight - (MARGIN * 2)
-  return { width, height }
+const contentDimensionSize = ({boxDimensionSize, dimension}) => {
+  const margin = MARGIN[dimension]
+  return boxDimensionSize - (2 * margin)
 }
 
 const totalInnerMargins = data => {
@@ -26,7 +30,50 @@ const totalInnerMargins = data => {
   return MARGIN * gaps
 }
 
-const barWidth = ({data, boxWidth, boxHeight}) => {
-  const { width: contentWidth } = contentSize({boxWidth, boxHeight})
-  return contentWidth / data.length
+// Bar Sizes
+// =========
+
+const barWidth = ({ data, boxWidth }) => {
+  const contentWidth = contentDimensionSize({
+    boxDimensionSize: boxWidth,
+    dimension: "X"
+  })
+
+  const totalInnerMarginSize = (data.length - 1) * MARGIN.X
+  return (contentWidth - totalInnerMarginSize) / data.length
+}
+
+const yMaxValue = data => {
+  const values = data.map(dataPoint => dataPoint.y)
+  return Math.max(...values)
+}
+
+const barHeight = ({yValue, data, boxHeight}) => {
+  const maxHeight = contentDimensionSize({
+    boxDimensionSize: boxHeight,
+    dimension: "Y"
+  })
+
+  const portionOfMax = yValue / yMaxValue(data)
+  return portionOfMax * maxHeight
+}
+
+// Positions
+// =========
+
+const positionX = ({ index, boxWidth, data }) => {
+  const humanizedIndex = index + 1
+  const precedingBarsCount = humanizedIndex - 1
+  const widthWithMargin = barWidth({ data, boxWidth })
+  return MARGIN.X + (precedingBarsCount * widthWithMargin)
+}
+
+const positionY = ({ boxHeight, yValue, data }) => {
+  const contentHeight = ({
+    boxDimensionSize: boxHeight,
+    dimension: "Y"
+  })
+
+  const barHeight = ({ yValue, data, boxHeight })
+  return contentHeight - barHeight + MARGIN.Y
 }
