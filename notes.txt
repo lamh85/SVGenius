@@ -1,0 +1,65 @@
+Chain of dependency:
+  up: base
+  down: helpers
+
+  Final output:
+  Source of truth for all of chart's properties, and each bar's property
+  
+  Final model
+  
+
+Data structure:
+  {
+    global: {
+      style: Style
+    },
+    axes: {
+      y: Axis,
+      x: Axis
+    }
+    dataPoints: [
+      DataPoint,
+      DataPoint,
+      DataPoint,
+      ...
+    ]
+  }
+  
+  Objects:
+  
+    DataPoint
+    {
+      x: DataPointDimension,
+      y: DataPointDimension,
+      tooltip: Tooltip
+      style: Style
+    }
+    
+    Tooltip
+    {
+      style: Style
+    }
+  
+    Style
+    {
+      padding:
+      height:
+      width:
+      backgroundColor:
+      border
+    }
+    
+    Axis
+    {
+      title:
+      scale: // Value per section. EG: one space between two markers represent 10
+    }
+  
+    DataPointDimension
+    {
+      value:
+      dataType:
+    }
+
+Describe the different objects as people:
+  Overall maker
