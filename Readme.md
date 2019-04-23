@@ -1,58 +1,68 @@
-Model:
+# Model (shallow)
+
+```javascript
 {
-  global: {
+  container: {
+    style: Style
+  },
+  legend: {
     style: Style
   },
   axes: {
+    style: Style,
     y: Axis,
     x: Axis
+  },
+  dataPoints: {
+    style: Style,
+    formatterX: value => {},
+    formatterY: value => {},
+    collection: [
+      DataPoint,
+      DataPoint,
+      DataPoint
+    ]
   }
-  dataPoints: [
-    DataPoint,
-    DataPoint,
-    DataPoint,
-    ...
-  ]
+}
+```
+
+# Deeper Objects
+
+```javascript
+Style =
+{
+  padding: '10px',
+  height: '10px',
+  width: '10px',
+  backgroundColor: 'red',
+  border: '1px solid black'
 }
 
-Objects:
-  DataPoint
-  {
-    x: DataPointDimension,
-    y: DataPointDimension,
-    tooltip: Tooltip
-    style: Style
-  }
+Axis =
+{
+  title: 'some text',
+  scale: 10 // Size represented between two markers.
+}
 
-  Tooltip
-  {
-    style: Style
-  }
+DataPoint =
+{
+  x: 1, // defaults to index + 1
+  y: 50,
+  tooltip: Tooltip,
+  style: Style
+}
 
-  Style
-  {
-    padding:
-    height:
-    width:
-    backgroundColor:
-    border
-  }
+Tooltip =
+{
+  style: Style,
+  content: '<p>some html</p>'
+}
 
-  Axis
-  {
-    title:
-    scale: // Value per section. EG: one space between two markers represents 10
-  }
+```
 
-  DataPointDimension
-  {
-    value:
-    dataType:
-    style: Style
-  }
+# Component Structure
 
-Component Structure
-
+```
 Container
   Tooltip
   Legend
@@ -60,24 +70,45 @@ Container
     Y Axis
     X Axis
     Bars
+```
 
-Lifecycle:
+Note: Should pass only the needed props down the tree. We don't want to duplicate because the number of data points = number of times of duplication.
 
-  Pattern: Should pass only the needed props down the tree. We don't want to duplicate because the number of data points = number of times of duplication.
+# Lifecycle
 
-  Inputs:
-    Required
-      data values
-      container size
-    Optional
-      container - style
-      axes - 
-      margin size
-  ⬇️
-  Bar width + Bar height + X-Y positions of the bars
-  The finished model:
-  Source of truth for all of chart's properties, and each bar's property.
-  ⬇️
-  Render
-  ⬇️
-  (return to the top)
+```
+Inputs:
+  Required:
+    data values
+    container size
+  Optional:
+    container - style
+    axes - style
+    margin size
+    formatter functions
+```
+
+⬇️
+
+Vaidate: Required object properties for required inputs should exist.
+
+⬇️
+
+```
+Computed states:
+  Bar width (model.dataPoints.collection)
+  Bar height (model.dataPoints.collection)
+  X-Y positions of the bars (model.dataPoints.collection)
+```
+
+⬇️
+
+The finished model: Source of truth for all of chart's properties, and each bar's property.
+
+⬇️
+
+Render
+
+⬇️
+
+(return to the top)
