@@ -76,21 +76,16 @@ Note: Should pass only the needed props down the tree. We don't want to duplicat
 
 # Lifecycle
 
-```
-Inputs:
-  Required:
-    data values
-    container size
-  Optional:
-    container - style
-    axes - style
-    margin size
-    formatter functions
-```
+The library receives the input.
 
 ⬇️
 
-Vaidate: Required object properties for required inputs should exist.
+Vaidate: Required object properties for required inputs should exist:
+```
+model.dataPoints.collection
+model.container.style.height
+model.container.style.width
+```
 
 ⬇️
 
