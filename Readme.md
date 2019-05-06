@@ -91,9 +91,16 @@ model.container.style.width
 
 ```
 Computed states:
-  Bar width (model.dataPoints.collection)
-  Bar height (model.dataPoints.collection)
-  X-Y positions of the bars (model.dataPoints.collection)
+  model.dataPoints.collection is an array of DataPoints
+  Each DataPoint has a 'style' property, whose value is an object.
+
+  Need to generate these properties in the Style:
+  {
+    width: ...
+    height: ...
+    left: ...
+    top: ...
+  }
 ```
 
 ⬇️
