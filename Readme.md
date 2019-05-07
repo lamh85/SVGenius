@@ -1,4 +1,4 @@
-# Model (shallow)
+# Data Model (shallow)
 
 ```javascript
 {
@@ -24,6 +24,17 @@
     ]
   }
 }
+```
+
+# Box Model
+```
+In the diagrams below, one pipe or one underscore denotes boundaries between regions.
+
+On the left:
+Outside the chart component | Y-axis title | margin | Y-axis scale markers | margin | Y-axis
+
+On the bottom:
+
 ```
 
 # Deeper Objects
