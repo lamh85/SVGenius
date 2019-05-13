@@ -63,15 +63,31 @@ const positionY = ({ boxHeight, yValue, data }) => {
   return contentHeight - barHeight + MARGIN.Y
 }
 
-// Root function
+// Root function:
+// This should be the only exportable function
 // =============
 
 const generateDataPointStyles = model => {
-  const collectionStyled = model.dataPoints.collection.map(dataPoint => {
+  const {
+    dataPoints: { collection: data },
+    container: {
+      style: {
+        width: boxWidth,
+        height: boxHeight
+      }
+    }
+  } = model
+
+  const collectionStyled = data.map((dataPoint, index) => {
+    const yValue = dataPoint.y
+
     return {
       ...dataPoint,
       style: {
-
+        left: positionX({ index, boxWidth, data }),
+        top: positionY({ boxHeight, data, yValue }),
+        height: barHeight({ yValue, data, boxHeight }),
+        width: barWidth({ data, boxWidth })
       }
     }
   })
