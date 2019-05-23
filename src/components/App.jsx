@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { hot } from 'react-hot-loader'
 
-import { DATA_POINTS } from '../constants'
+import { DATA_POINTS, MINIMUM_INPUT } from '../constants'
 
 const POSITIONS = {
   Y_AXIS: 10,
@@ -15,28 +15,7 @@ class App extends Component {
   }
 
   renderBars = () => {
-    return (
-      <svg width='600' height='100'>
-        {
-          DATA_POINTS.map((dataPoint, index) => {
-            // Renders one bar
-            return <rect
-              // top-left position
-              x={String(index * 10)}
-              y={String(POSITIONS.X_AXIS - dataPoint.y)}
-
-              // size
-              width='5'
-              height={String(dataPoint.y)}
-
-              // Other
-              fill='blue'
-              key={index}
-            />
-          })
-        }
-      </svg>
-    )
+    return <div></div>
   }
 
   render() {

@@ -34,6 +34,7 @@ On the left:
 Outside the chart component | Y-axis title | margin | Y-axis scale markers | margin | Y-axis
 
 On the bottom:
+TBD
 
 ```
 
@@ -97,6 +98,7 @@ model.dataPoints.collection
 model.container.style.height
 model.container.style.width
 ```
+If none of the styles exist, then take the container's height and width.
 
 ⬇️
 
