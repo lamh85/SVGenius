@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { hot } from 'react-hot-loader'
 
 import { DATA_POINTS, MINIMUM_INPUT } from '../constants'
+import Chart from './Chart'
 
 const POSITIONS = {
   Y_AXIS: 10,
@@ -20,7 +21,9 @@ class App extends Component {
 
   render() {
     return <React.Fragment>
-      {this.renderBars()}
+      <Chart
+        model={MINIMUM_INPUT}
+      />
     </React.Fragment>
   }
 }

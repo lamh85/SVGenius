@@ -1,3 +1,3 @@
-import modelGenerate from './controller.js'
+import { modelGenerate } from './controller.js'
 
 export default modelGenerate

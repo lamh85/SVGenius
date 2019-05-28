@@ -1,25 +1,26 @@
 import React, { Component } from 'react'
 import { hot } from 'react-hot-loader'
-import { modelGenerate } from '../../model_generator'
+import modelGenerate from '../../model_generator'
 
 // use helper to generate the final model
 // render the model
 
-class Container extends Component {
+class Chart extends Component {
   model = () => {
-    return modelGenerate(this.props.model)
+    // return modelGenerate(this.props.model)
   }
 
   render(){
     return (
       <div>
-        { JSON.stringify(this.model()) }
+        model: { JSON.stringify(this.model()) }
+        <br/>props: { JSON.stringify(this.props) }
       </div>
     )
   }
 }
 
-export default hot(module)(Container)
+export default hot(module)(Chart)
 
 
 /* 
