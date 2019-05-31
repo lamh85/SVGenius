@@ -5,14 +5,11 @@ const MARGIN = {
   Y: 10
 }
 
+const INNER_MARGIN = MARGIN.X / 2
+
 const contentDimensionSize = ({ boxDimensionSize, dimension }) => {
   const margin = MARGIN[dimension]
   return boxDimensionSize - (2 * margin)
-}
-
-const totalInnerMargins = data => {
-  const gaps = data.length - 1
-  return MARGIN * gaps
 }
 
 // Bar Sizes
@@ -24,7 +21,7 @@ const barWidth = ({ data, boxWidth }) => {
     dimension: "X"
   })
 
-  const totalInnerMarginSize = (data.length - 1) * MARGIN.X
+  const totalInnerMarginSize = (data.length - 1) * INNER_MARGIN
   return (contentWidth - totalInnerMarginSize) / data.length
 }
 
@@ -39,6 +36,10 @@ const barHeight = ({ yValue, data, boxHeight }) => {
     dimension: "Y"
   })
 
+  if (yValue === 0) {
+    return 0
+  }
+
   const portionOfMax = yValue / yMaxValue(data)
   return portionOfMax * maxHeight
 }
@@ -47,37 +48,45 @@ const barHeight = ({ yValue, data, boxHeight }) => {
 // =========
 
 const positionX = ({ index, boxWidth, data }) => {
-  const humanizedIndex = index + 1
-  const precedingBarsCount = humanizedIndex - 1
-  const widthWithMargin = barWidth({ data, boxWidth })
-  return MARGIN.X + (precedingBarsCount * widthWithMargin)
+  // number of preceeding bars + number of preceeding gaps
+  const accumBars = index
+  const barWidthResult = barWidth({ data, boxWidth })
+  const accumBarsWidth = accumBars * barWidthResult
+
+  const accumGaps = accumBars == 1 ? 0 : accumBars - 1
+  const accumGapsWidth = accumGaps * INNER_MARGIN
+
+  return accumBarsWidth + accumGapsWidth
 }
 
 const positionY = ({ boxHeight, yValue, data }) => {
-  const contentHeight = ({
+  const contentHeight = contentDimensionSize({
     boxDimensionSize: boxHeight,
     dimension: "Y"
   })
 
-  const barHeight = ({ yValue, data, boxHeight })
-  return contentHeight - barHeight + MARGIN.Y
+  const barHeightResult = barHeight({ yValue, data, boxHeight })
+  return contentHeight - barHeightResult + MARGIN.Y
 }
 
 // Root function:
 // This should be the only exportable function
 // =============
 
-const generateDataPointStyles = model => {
+export const generateDataPointStyles = model => {
   const {
     dataPoints: { collection: data },
     container: {
       style: {
-        width: boxWidth,
-        height: boxHeight
+        width: widthString,
+        height: heightString
       }
     }
   } = model
-
+  
+  const boxWidth = parseFloat(widthString)
+  const boxHeight = parseFloat(heightString)
+  
   const collectionStyled = data.map((dataPoint, index) => {
     const yValue = dataPoint.y
 

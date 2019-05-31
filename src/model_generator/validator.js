@@ -9,8 +9,17 @@ const isObjectPathPresent = ({ object, path }) => {
 
   const levels = path.split('.')
   let valueFinal = object
-  for (i = 0; i < levels.length; i++) {
-    const key = levels[i]
+  
+  // levels.map((item, index) => {
+  //   const key = levels[index]
+  //   const currentValue = valueFinal[key]
+  //   valueFinal = currentValue
+  //   if (!currentValue) {
+  //     break
+  //   }
+  // })
+  for (let index = 0; index < levels.length; index++) {
+    const key = levels[index]
     valueFinal = valueFinal[key]
   }
 
