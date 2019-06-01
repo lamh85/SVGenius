@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Bar = props => {
-  const { left, top } = props
-  const rectProps = { ...props, x: left, y: top }
+  const { left: x, top: y } = props
+  const rectProps = { ...props, x, y }
   return <rect {...rectProps} fill='blue' />
 }
 
