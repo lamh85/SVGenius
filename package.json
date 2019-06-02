@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development",
-    "test": "jest . --config=test_config.js"
+    "test": "jest ."
+  },
+  "jest": {
+    "setupFilesAfterEnv": ["<rootDir>/test_config.js"]
   },
   "keywords": [],
   "author": "",
