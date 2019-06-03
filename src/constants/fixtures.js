@@ -14,3 +14,10 @@ export const MINIMUM_INPUT = {
     }
   }
 }
+
+export const BAR_PROPS_MOCK = {
+  left: 5,
+  top: 6,
+  height: 7,
+  width: 8
+}

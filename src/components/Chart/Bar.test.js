@@ -2,14 +2,9 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import Bar from './Bar.jsx'
 
-const props = {
-  left: 5,
-  top: 6,
-  height: 7,
-  width: 8
-}
+import { BAR_PROPS_MOCK } from '../../constants/fixtures.js'
 
-const component = shallow(<Bar {...props} />)
+const component = shallow(<Bar {...BAR_PROPS_MOCK} />)
 
 describe('<Bar />', () => {
   it('renders the component', () => {
