@@ -27,8 +27,6 @@ const setup = (propsOverride = {}) => {
 
 describe('<Chart/>', () => {
   it('number of rendered bars match with length of datapoints', () => {
-    
-
     const { component } = setup()
     expect(component.find('Bar').length).toEqual(3)
   })

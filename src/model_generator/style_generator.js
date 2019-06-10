@@ -7,7 +7,7 @@ const MARGIN = {
 
 const INNER_MARGIN = MARGIN.X / 2
 
-const contentDimensionSize = ({ boxDimensionSize, dimension }) => {
+export const contentDimensionSize = ({ boxDimensionSize, dimension }) => {
   const margin = MARGIN[dimension]
   return boxDimensionSize - (2 * margin)
 }
@@ -15,22 +15,23 @@ const contentDimensionSize = ({ boxDimensionSize, dimension }) => {
 // Bar Sizes
 // =========
 
-const barWidth = ({ data, boxWidth }) => {
+export const barWidth = ({ data, boxWidth }) => {
   const contentWidth = contentDimensionSize({
     boxDimensionSize: boxWidth,
     dimension: "X"
   })
-
+  console.log('===')
+console.log(contentWidth)
   const totalInnerMarginSize = (data.length - 1) * INNER_MARGIN
   return (contentWidth - totalInnerMarginSize) / data.length
 }
 
-const yMaxValue = data => {
+export const yMaxValue = data => {
   const values = data.map(dataPoint => dataPoint.y)
   return Math.max(...values)
 }
 
-const barHeight = ({ yValue, data, boxHeight }) => {
+export const barHeight = ({ yValue, data, boxHeight }) => {
   const maxHeight = contentDimensionSize({
     boxDimensionSize: boxHeight,
     dimension: "Y"
@@ -47,7 +48,7 @@ const barHeight = ({ yValue, data, boxHeight }) => {
 // Positions
 // =========
 
-const positionX = ({ index, boxWidth, data }) => {
+export const positionX = ({ index, boxWidth, data }) => {
   // number of preceeding bars + number of preceeding gaps
   const accumBars = index
   const barWidthResult = barWidth({ data, boxWidth })
@@ -59,7 +60,7 @@ const positionX = ({ index, boxWidth, data }) => {
   return accumBarsWidth + accumGapsWidth
 }
 
-const positionY = ({ boxHeight, yValue, data }) => {
+export const positionY = ({ boxHeight, yValue, data }) => {
   const contentHeight = contentDimensionSize({
     boxDimensionSize: boxHeight,
     dimension: "Y"
