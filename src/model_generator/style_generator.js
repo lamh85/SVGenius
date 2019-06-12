@@ -20,8 +20,7 @@ export const barWidth = ({ data, boxWidth }) => {
     boxDimensionSize: boxWidth,
     dimension: "X"
   })
-  console.log('===')
-console.log(contentWidth)
+
   const totalInnerMarginSize = (data.length - 1) * INNER_MARGIN
   return (contentWidth - totalInnerMarginSize) / data.length
 }

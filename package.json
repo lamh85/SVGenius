@@ -8,8 +8,12 @@
     "test": "jest"
   },
   "jest": {
+    "clearMocks": true,
+    "maxConcurrency": 10,
     "setupFilesAfterEnv": ["<rootDir>/test_config.js"],
-    "maxConcurrency": 10
+    "watchPlugins": [
+      "jest-watch-master"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -26,6 +30,7 @@
     "enzyme-adapter-react-16": "^1.11.2",
     "jest": "^24.7.1",
     "jest-styled-components": "^6.3.1",
+    "jest-watch-master": "^1.0.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.2.1"
