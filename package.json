@@ -10,7 +10,9 @@
   "jest": {
     "clearMocks": true,
     "maxConcurrency": 10,
-    "setupFilesAfterEnv": ["<rootDir>/test_config.js"],
+    "setupFilesAfterEnv": [
+      "<rootDir>/test_config.js"
+    ],
     "watchPlugins": [
       "jest-watch-master"
     ]

@@ -7,16 +7,16 @@ const MARGIN = {
 
 const INNER_MARGIN = MARGIN.X / 2
 
-export const contentDimensionSize = ({ boxDimensionSize, dimension }) => {
+exports.contentDimensionSize = ({ boxDimensionSize, dimension }) => {
   const margin = MARGIN[dimension]
-  return boxDimensionSize - (2 * margin)
+  return boxDimensionSize - 2 * margin
 }
 
 // Bar Sizes
 // =========
 
-export const barWidth = ({ data, boxWidth }) => {
-  const contentWidth = contentDimensionSize({
+exports.barWidth = ({ data, boxWidth }) => {
+  const contentWidth = exports.contentDimensionSize({
     boxDimensionSize: boxWidth,
     dimension: "X"
   })
@@ -77,16 +77,13 @@ export const generateDataPointStyles = model => {
   const {
     dataPoints: { collection: data },
     container: {
-      style: {
-        width: widthString,
-        height: heightString
-      }
+      style: { width: widthString, height: heightString }
     }
   } = model
-  
+
   const boxWidth = parseFloat(widthString)
   const boxHeight = parseFloat(heightString)
-  
+
   const collectionStyled = data.map((dataPoint, index) => {
     const yValue = dataPoint.y
 
