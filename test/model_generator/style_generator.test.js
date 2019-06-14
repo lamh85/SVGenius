@@ -36,3 +36,11 @@ describe('barWidth', () => {
     expect(result).toEqual(28.75)
   })
 })
+
+describe('yMaxValue', () => {
+  it('returns the max Y value', () => {
+    const params = [{y: 1}, {y: 2}, {y: 3}]
+    const result = testModule.yMaxValue(params)
+    expect(result).toEqual(3)
+  })
+})
