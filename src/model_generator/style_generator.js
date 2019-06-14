@@ -53,8 +53,8 @@ exports.positionX = ({ index, boxWidth, data }) => {
   const barWidthResult = exports.barWidth({ data, boxWidth })
   const accumBarsWidth = accumBars * barWidthResult
 
-  const accumGaps = accumBars == 1 ? 0 : accumBars - 1
-  const accumGapsWidth = accumGaps * INNER_MARGIN
+  // const accumGaps = accumBars == 1 ? 0 : accumBars
+  const accumGapsWidth = accumBars * INNER_MARGIN
 
   return accumBarsWidth + accumGapsWidth
 }
