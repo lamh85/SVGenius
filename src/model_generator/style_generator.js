@@ -25,13 +25,13 @@ exports.barWidth = ({ data, boxWidth }) => {
   return (contentWidth - totalInnerMarginSize) / data.length
 }
 
-export const yMaxValue = data => {
+exports.yMaxValue = data => {
   const values = data.map(dataPoint => dataPoint.y)
   return Math.max(...values)
 }
 
-export const barHeight = ({ yValue, data, boxHeight }) => {
-  const maxHeight = contentDimensionSize({
+exports.barHeight = ({ yValue, data, boxHeight }) => {
+  const maxHeight = exports.contentDimensionSize({
     boxDimensionSize: boxHeight,
     dimension: "Y"
   })
@@ -40,17 +40,17 @@ export const barHeight = ({ yValue, data, boxHeight }) => {
     return 0
   }
 
-  const portionOfMax = yValue / yMaxValue(data)
+  const portionOfMax = yValue / exports.yMaxValue(data)
   return portionOfMax * maxHeight
 }
 
 // Positions
 // =========
 
-export const positionX = ({ index, boxWidth, data }) => {
+exports.positionX = ({ index, boxWidth, data }) => {
   // number of preceeding bars + number of preceeding gaps
   const accumBars = index
-  const barWidthResult = barWidth({ data, boxWidth })
+  const barWidthResult = exports.barWidth({ data, boxWidth })
   const accumBarsWidth = accumBars * barWidthResult
 
   const accumGaps = accumBars == 1 ? 0 : accumBars - 1
@@ -59,13 +59,13 @@ export const positionX = ({ index, boxWidth, data }) => {
   return accumBarsWidth + accumGapsWidth
 }
 
-export const positionY = ({ boxHeight, yValue, data }) => {
-  const contentHeight = contentDimensionSize({
+exports.positionY = ({ boxHeight, yValue, data }) => {
+  const contentHeight = exports.contentDimensionSize({
     boxDimensionSize: boxHeight,
     dimension: "Y"
   })
 
-  const barHeightResult = barHeight({ yValue, data, boxHeight })
+  const barHeightResult = exports.barHeight({ yValue, data, boxHeight })
   return contentHeight - barHeightResult + MARGIN.Y
 }
 
@@ -73,7 +73,7 @@ export const positionY = ({ boxHeight, yValue, data }) => {
 // This should be the only exportable function
 // =============
 
-export const generateDataPointStyles = model => {
+exports.generateDataPointStyles = model => {
   const {
     dataPoints: { collection: data },
     container: {
@@ -90,10 +90,10 @@ export const generateDataPointStyles = model => {
     return {
       ...dataPoint,
       style: {
-        left: positionX({ index, boxWidth, data }),
-        top: positionY({ boxHeight, data, yValue }),
-        height: barHeight({ yValue, data, boxHeight }),
-        width: barWidth({ data, boxWidth })
+        left: exports.positionX({ index, boxWidth, data }),
+        top: exports.positionY({ boxHeight, data, yValue }),
+        height: exports.barHeight({ yValue, data, boxHeight }),
+        width: exports.barWidth({ data, boxWidth })
       }
     }
   })
