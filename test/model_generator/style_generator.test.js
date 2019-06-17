@@ -78,8 +78,30 @@ describe('positionX', () => {
       data: [ 'one', 'two', 'three', 'four' ]
     }
 
+    const result = testModule.positionX(params)
+
     // Find the X position of the 3rd (index = 2) bar
     // Each bar is 10px wide
-    
+    // At this point, there were already 2 bars and two margins:
+    // 2 * 10 + 2 * 5 = 20 + 10 = 30
+    expect(result).toEqual(30)
+  })
+})
+
+describe('positionY', () => {
+  it('returns the Y position', () => {
+    mockFunction({ functionName: 'contentDimensionSize', returnValue: 100})
+    mockFunction({ functionName: 'barHeight', returnValue: 50 })
+
+    const params = {
+      boxHeight: 'will be mocked',
+      yValue: 'wlll be mocked',
+      data: 'will be mocked'
+    }
+
+    const result = testModule.positionY(params)
+
+    // 100 - 50 + 10 (Y Margin)
+    expect(result).toEqual(60)
   })
 })
