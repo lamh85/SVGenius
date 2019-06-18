@@ -105,3 +105,36 @@ describe('positionY', () => {
     expect(result).toEqual(60)
   })
 })
+
+describe('generateDataPointStyles', () => {
+
+  const params = {
+    dataPoints: {
+      collection: [{ y: 1 }, { y: 2 }, { y: 3 }]
+    },
+    container: {
+      style: {
+        width: '200px',
+        height: '100px'
+      }
+    }
+  }
+
+  it('sends the correct arguments to other functions', () => {
+    
+  })
+
+  it('returns the model with datapoint styles', () => {
+    ['positionX', 'positionY', 'barHeight', 'barWidth'].map(name => {
+      mockFunction({ functionName: name, returnValue: name })
+    })
+
+
+    const {
+      dataPoints: { collection: data },
+      container: {
+        style: { width: widthString, height: heightString }
+      }
+    } = model
+  })
+})
