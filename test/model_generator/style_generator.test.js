@@ -110,7 +110,7 @@ describe('generateDataPointStyles', () => {
 
   const params = {
     dataPoints: {
-      collection: [{ y: 1 }, { y: 2 }, { y: 3 }]
+      collection: [{ y: 1 }, { y: 2 }]
     },
     container: {
       style: {
@@ -121,7 +121,42 @@ describe('generateDataPointStyles', () => {
   }
 
   it('sends the correct arguments to other functions', () => {
-    
+    testModule.positionX = jest.fn()
+    testModule.positionY = jest.fn()
+    testModule.barHeight = jest.fn()
+    testModule.barWidth = jest.fn()
+
+    testModule.generateDataPointStyles(params)
+
+    const positionXCalls = testModule.positionX.mock.calls
+    expect(positionXCalls[0][0].index).toEqual(0)
+    expect(positionXCalls[0][0].boxWidth).toEqual(200)
+    expect(positionXCalls[0][0].data).toEqual([{ y: 1 }, { y: 2 }])
+    expect(positionXCalls[1][0].index).toEqual(1)
+    expect(positionXCalls[1][0].boxWidth).toEqual(200)
+    expect(positionXCalls[1][0].data).toEqual([{ y: 1 }, { y: 2 }])
+
+    const positionYCalls = testModule.positionY.mock.calls
+    expect(positionYCalls[0][0].boxHeight).toEqual(100)
+    expect(positionYCalls[0][0].data).toEqual([{ y: 1 }, { y: 2 }])
+    expect(positionYCalls[0][0].yValue).toEqual(1)
+    expect(positionYCalls[1][0].boxHeight).toEqual(100)
+    expect(positionYCalls[1][0].data).toEqual([{ y: 1 }, { y: 2 }])
+    expect(positionYCalls[1][0].yValue).toEqual(2)
+
+    const barHeightCalls = testModule.barHeight.mock.calls
+    expect(barHeightCalls[0][0].yValue).toEqual(1)
+    expect(barHeightCalls[0][0].data).toEqual([{ y: 1 }, { y: 2 }])
+    expect(barHeightCalls[0][0].boxHeight).toEqual(100)
+    expect(barHeightCalls[1][0].yValue).toEqual(2)
+    expect(barHeightCalls[1][0].data).toEqual([{ y: 1 }, { y: 2 }])
+    expect(barHeightCalls[1][0].boxHeight).toEqual(100)
+
+    const barWidthCalls = testModule.barWidth.mock.calls
+    expect(barWidthCalls[0][0].data).toEqual([{ y: 1 }, { y: 2 }])
+    expect(barWidthCalls[0][0].boxWidth).toEqual(200)
+    expect(barWidthCalls[1][0].data).toEqual([{ y: 1 }, { y: 2 }])
+    expect(barWidthCalls[1][0].boxWidth).toEqual(200)
   })
 
   it('returns the model with datapoint styles', () => {
@@ -130,11 +165,11 @@ describe('generateDataPointStyles', () => {
     })
 
 
-    const {
-      dataPoints: { collection: data },
-      container: {
-        style: { width: widthString, height: heightString }
-      }
-    } = model
+    // const {
+    //   dataPoints: { collection: data },
+    //   container: {
+    //     style: { width: widthString, height: heightString }
+    //   }
+    // } = model
   })
 })
