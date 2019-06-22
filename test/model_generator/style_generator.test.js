@@ -3,7 +3,7 @@
 const testModule = require('../../src/model_generator/style_generator.js')
 
 const mockFunction = ({ functionName, returnValue }) => {
-  testModule[functionName] = jest.fn().mockReturnValueOnce(returnValue)
+  testModule[functionName] = jest.fn().mockReturnValue(returnValue)
 }
 
 describe('contentDimensionSize', () => {
@@ -164,12 +164,28 @@ describe('generateDataPointStyles', () => {
       mockFunction({ functionName: name, returnValue: name })
     })
 
+    const expectedCollection = [
+      {
+        y: 1,
+        style: {
+          left: 'positionX',
+          top: 'positionY',
+          height: 'barHeight',
+          width: 'barWidth'
+        }
+      },
+      {
+        y: 2,
+        style: {
+          left: 'positionX',
+          top: 'positionY',
+          height: 'barHeight',
+          width: 'barWidth'
+        }
+      }
+    ]
 
-    // const {
-    //   dataPoints: { collection: data },
-    //   container: {
-    //     style: { width: widthString, height: heightString }
-    //   }
-    // } = model
+    const result = testModule.generateDataPointStyles(params)
+    expect(result.dataPoints.collection).toEqual(expectedCollection)
   })
 })
