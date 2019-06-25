@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-const Bar = props => {
-  const { left: x, top: y } = props
-  const rectProps = { ...props, x, y }
-  return <rect {...rectProps} fill='blue' />
+class Bar extends Component {
+  render(){
+    const { left: x, top: y } = props
+    const rectProps = { ...props, x, y }
+    return <rect {...rectProps} fill='blue' />
+  }
 }
 
 Bar.propTypes = {
