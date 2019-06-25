@@ -6,6 +6,17 @@ import modelGenerate from '../../model_generator'
 import Bar from './Bar.jsx'
 
 class Chart extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      hoveredX: '',
+      hoveredY: '',
+      clientX: '',
+      clientY: ''
+    }
+  }
+
   render(){
     const {
       dataPoints: { collection },
@@ -15,7 +26,14 @@ class Chart extends Component {
     return (
       <svg {...containerStyle}>
         {collection.map((dataPoint, index) => {
-          return <Bar key={index} {...dataPoint.style} />
+          return (
+            <Bar
+              key={index}
+              {...dataPoint.style}
+              dataX={index + 1}
+              dataY={dataPoint.y}
+            />
+          )
         })}
       </svg>
     )
@@ -33,8 +51,8 @@ Chart.propTypes = {
     }),
     container: PropTypes.shape({
       style: PropTypes.shape({
-        height: PropTypes.number.isRequired,
-        width: PropTypes.number.isRequired
+        height: PropTypes.string.isRequired,
+        width: PropTypes.string.isRequired
       })
     })
   })
