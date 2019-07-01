@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import modelGenerate from '../../model_generator'
 import Bar from './Bar.jsx'
+import Tooltip from './Tooltip.jsx'
 
 class Chart extends Component {
   constructor(props) {
@@ -60,25 +61,38 @@ class Chart extends Component {
       onMouseMove: this.handleMouseMove
     }
 
+    const {
+      isHoveringBar,
+      isHoveringChart,
+      hoveredDataX,
+      hoveredDataY
+    } = this.state
+
     return (
-      <svg {...chartProps}>
-        {collection.map((dataPoint, index) => {
-          const data = {
-            dataX: index + 1,
-            dataY: dataPoint.y
-          }
-          
-          return (
-            <Bar
-              key={index}
-              {...dataPoint.style}
-              {...data}
-              handleMouseLeave={this.handleMouseLeaveBar}
-              handleMouseEnter={() => this.handleMouseEnterBar(data)}
-            />
-          )
-        })}
-      </svg>
+      <>
+        <svg {...chartProps}>
+          {collection.map((dataPoint, index) => {
+            const data = {
+              dataX: index + 1,
+              dataY: dataPoint.y
+            }
+            
+            return (
+              <Bar
+                key={index}
+                {...dataPoint.style}
+                {...data}
+                handleMouseLeave={this.handleMouseLeaveBar}
+                handleMouseEnter={() => this.handleMouseEnterBar(data)}
+              />
+            )
+          })}
+        </svg>
+
+        {isHoveringBar && isHoveringChart &&
+          <Tooltip dataX={hoveredDataX} dataY={hoveredDataY} />
+        }
+      </>
     )
   }
 }

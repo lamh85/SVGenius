@@ -41,4 +41,13 @@ describe('<Chart/>', () => {
     component.simulate('mouseLeave')
     expect(component.instance().state.isHoveringChart).toEqual(false)
   })
+
+  it('renders tooltip when hovered', () => {
+    const { component } = setup()
+    component.instance().state.isHoveringChart = true
+    component.instance().state.isHoveringBar = true
+    component.instance().state.hoveredDataX = 3
+    component.instance().state.hoveredDataY = 5
+    expect(component.find('Tooltip').length).toEqual(1)
+  })
 })
