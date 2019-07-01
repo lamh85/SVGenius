@@ -10,12 +10,42 @@ class Chart extends Component {
     super(props)
 
     this.state = {
-      hoveredX: '',
-      hoveredY: '',
+      hoveredDataX: '',
+      hoveredDataY: '',
       clientX: '',
-      clientY: ''
+      clientY: '',
+      isHoveringChart: false,
+      isHoveringBar: false,
     }
   }
+
+  handleMouseEnterChart = () => {
+    this.setState({isHoveringChart: true})
+  }
+
+  handleMouseLeaveChart = () => {
+    this.setState({isHoveringChart: false})
+  }
+
+  handleMouseMove = event => {
+    this.setState({
+      clientX: event.clientX,
+      clientY: event.clientY
+    })
+  }
+
+  handleMouseEnterBar = data => {
+    this.setState({
+      hoveredDataX: data.dataX,
+      hoveredDataY: data.dataY,
+      isHoveringBar: true
+    })
+  }
+
+  handleMouseLeaveBar = () => {
+    this.setState({isHoveringBar: false})
+  }
+
 
   render(){
     const {
@@ -23,15 +53,29 @@ class Chart extends Component {
       container: { style: containerStyle }
     } = modelGenerate(this.props.model)
 
+    const chartProps = {
+      ...containerStyle,
+      onMouseEnter: this.handleMouseEnterChart,
+      onMouseLeave: this.handleMouseLeaveChart,
+      onMouseMove: this.handleMouseMove
+    }
+
     return (
-      <svg {...containerStyle}>
+      <svg {...chartProps}>
         {collection.map((dataPoint, index) => {
+          const data = {
+            dataX: index + 1,
+            dataY: dataPoint.y
+          }
+          
           return (
             <Bar
               key={index}
               {...dataPoint.style}
-              dataX={index + 1}
-              dataY={dataPoint.y}
+              {...data}
+              setTooltipData={this.setTooltipData}
+              handleMouseLeave={this.handleMouseLeaveBar}
+              handleMouseEnter={() => this.handleMouseEnterBar(data)}
             />
           )
         })}

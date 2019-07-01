@@ -2,17 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class Bar extends Component {
-  handleMouseEnter = () => {
-    
-    console.log("========")
-    console.log("X: ", this.props.dataX)
-    console.log("Y: ", this.props.dataY)
-  }
-
   render(){
-    const { left, top, width, height } = this.props
-
-// {"style":{"left":16.416666666666664,"top":481.864406779661,"height":8.135593220338983,"width":11.416666666666666}}
+    const {
+      left,
+      top,
+      width,
+      height,
+      handleMouseEnter,
+      handleMouseLeave,
+    } = this.props
 
     return (
       <rect
@@ -21,19 +19,22 @@ class Bar extends Component {
         x={left}
         y={top}
         fill='blue'
-        onMouseEnter={this.handleMouseEnter}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       />
     )
   }
 }
 
 Bar.propTypes = {
-  // style: PropTypes.shape({
-    left: PropTypes.number.isRequired,
-    top: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    width: PropTypes.number.isRequired
-  // })
+  left: PropTypes.number.isRequired,
+  top: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+  dataX: PropTypes.number.isRequired,
+  dataY: PropTypes.number.isRequired,
+  handleMouseEnter: PropTypes.func.isRequired,
+  handleMouseLeave: PropTypes.func.isRequired
 }
 
 export default Bar

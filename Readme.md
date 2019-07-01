@@ -127,3 +127,27 @@ Render
 ⬇️
 
 (return to the top)
+
+# Tooltip - Design Doc
+
+## Need
+GIVEN the chart has bars
+
+WHEN cursor hovers a bar
+* THEN a tooltip appears
+* AND the tooltip follows the cursor
+
+WHEN the cursor does NOT hover a bar
+* THEN no tooltip is rendered
+
+## Constraints
+The only Javascript event names and properties available:
+* Mouse enter
+* Mouse leave
+* Client X
+* Client Y
+
+## How to define a hover without including false positive
+Cursor has "mouse entered" the chart and NOT "mouse left" the chart.
+
+Cursor has "mouse entered" 
