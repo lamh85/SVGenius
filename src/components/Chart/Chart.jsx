@@ -73,7 +73,6 @@ class Chart extends Component {
               key={index}
               {...dataPoint.style}
               {...data}
-              setTooltipData={this.setTooltipData}
               handleMouseLeave={this.handleMouseLeaveBar}
               handleMouseEnter={() => this.handleMouseEnterBar(data)}
             />
